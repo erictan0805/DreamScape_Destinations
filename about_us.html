@@ -1,0 +1,57 @@
+<!-- aboutus.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    .about-us-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    p {
+      color: blue;
+      line-height: 1.6;
+    }
+	.back-button {
+	  position: fixed;
+	  top: 20px; 
+	  size: 100px 100px
+	  cursor: pointer;
+	  width: 50px; 
+	  height: 50px;
+	}
+  </style>
+</head>
+<body>
+<img class="back-button" src="returnicon.jpeg" alt="Back" onclick="goBack()">
+  <h1>About Us</h1>
+  <div class="about-us-container">
+    <p>Welcome to Our Company!</p>
+
+    <p>We are an online resort booking platform founded in 2004. Our platform can help you find a resort and view detailed information 
+	about the resort. On our platform, you will be able to book the resort you want at a more cost-effective price.</p>
+
+  </div>
+ <script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resort Booking Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+	    padding-top: 50px;
+    }
+	 h1 {
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover 
+	{
+      background-color: #45a049;
+    }
+	.back-button 
+	{
+		position: fixed;
+		top: 20px; 
+		size: 100px 100px
+		cursor:pointer;
+		width: 50px; 
+		height: 50px;
+	}
+  </style>
+</head>
+<body>
+<img class="back-button" src="returnicon.jpeg" alt="Back" onclick="goBack()">
+<h1>This is the payment page</h1>
+<fieldset>
+  <legend><h2>Resort Booking Form</h2></legend>
+  <form id="bookingForm">
+    <label for="resort">Resort:</label>
+    <select id="resort" name="resort" required>
+	 <optgroup label="Pulau Langkawi Resorts">
+      <option value="resort1">Frangipani Langkawi Resort</option>
+      <option value="resort2">Holiday Villa Beach Resort & Spa Langkawi</option>
+      <option value="resort3">Berjaya Langkawi Resort</option>
+	 </optgroup>
+	 <optgroup label="Johor Bahru Resort">
+      <option value="resort4">The Legoland Malaysia Resort</option>
+      <option value="resort5">Pulai Springs Resort</option>
+      <option value="resort6">Amerin Hotel Johor Bahru</option>
+	  <option value="resort7">Somerset Medini Iskandar Puteri</option>
+	  <option value="resort8">D'Pristine Legoland @UHA</option>
+	  <option value="resort9">Fraser Place Puteri Harbour</option>
+	 </optgroup>
+	 <optgroup label="Pulau Redang Resort">
+      <option value="resort10">The Taaras Beach & Spa Resort</option>
+      <option value="resort11">Redang De Rimba Resort</option>
+      <option value="resort12">Redang Campstay (Bamboo House)</option>
+	 </optgroup>
+	 <optgroup label="Semporna Resort">
+      <option value="resort13">Lato Lato Resort</option>
+      <option value="resort14">Semporna Seaview Hotel</option>
+      <option value="resort15">SKY Water Villas, Semporna Sabah</option>
+	  <option value="resort16">OYO 89712 Grand Inn</option>
+	  <option value="resort17">Pavalintang Resort</option>
+	 </optgroup>
+    </select>
+
+    <label for="checkIn">Check-in Date:</label>
+    <input type="date" id="checkIn" name="checkIn" required>
+
+    <label for="checkOut">Check-out Date:</label>
+    <input type="date" id="checkOut" name="checkOut" required>
+
+    <label for="roomType">Room Type:</label>
+    <select id="roomType" name="roomType" required>
+      <option value="standard">Standard Room</option>
+      <option value="deluxe">Deluxe Room</option>
+      <option value="suite">Suite</option>
+    </select>
+
+    <label for="roomAmount">Number of Rooms:</label>
+    <input type="number" id="roomAmount" name="roomAmount" min="0" required>
+
+    <button type="button" onclick="calculateTotal()">Calculate Total</button>
+
+    <label for="total">Total Payment:</label>
+    <input type="text" id="total" name="total" readonly>
+
+    <button type="submit">Submit Booking</button>
+  </form>
+</fieldset>
+
+<script>
+  function goBack() {
+    window.history.back();
+    }
+  function searchResorts() {
+        document.getElementById('booking-form').style.display = 'none';
+        document.getElementById('result-page').style.display = 'block';
+    }
+  function calculateTotal() {
+    var resort = document.getElementById('resort').value;
+    var roomType = document.getElementById('roomType').value;
+    var roomAmount = parseInt(document.getElementById('roomAmount').value, 10) || 0;
+
+    var resortPrices = {
+      'resort1': { standard: 340, deluxe: 429, suite: 582 },
+      'resort2': { standard: 287, deluxe: 322, suite: 425 },
+      'resort3': { standard: 494, deluxe: 586, suite: 644 }, 
+	  'resort4': { standard: 1109, deluxe: 1159, suite: 1220 },
+      'resort5': { standard: 190, deluxe: 208, suite: 318 },
+      'resort6': { standard: 187, deluxe: 206, suite: 276 }, 
+	  'resort7': { standard: 273, deluxe: 307, suite: 334 },
+      'resort8': { standard: 239, deluxe: 277, suite: 394 },
+      'resort9': { standard: 296, deluxe: 313, suite: 339 }, 
+	  'resort10': { standard: 500, deluxe: 1605, suite: 1904 },
+      'resort11': { standard: 178, deluxe: 198, suite: 220 },
+      'resort12': { standard: 341, deluxe: 380, suite: 431 }, 
+	  'resort13': { standard: 239, deluxe: 277, suite: 394 },
+      'resort14': { standard: 296, deluxe: 313, suite: 339 }, 
+	  'resort15': { standard: 500, deluxe: 1605, suite: 1904 },
+      'resort16': { standard: 178, deluxe: 198, suite: 220 },
+      'resort17': { standard: 341, deluxe: 380, suite: 431 },
+	  
+    };
+
+    var totalDays = Math.ceil((new Date(document.getElementById('checkOut').value) - new Date(document.getElementById('checkIn').value)) / (1000 * 60 * 60 * 24));
+
+    var roomRate = resortPrices[resort][roomType];
+
+    var totalPayment = (roomAmount * roomRate) * totalDays;
+
+    document.getElementById('total').value = 'RM' + totalPayment.toFixed(2);
+  }
+
+  document.getElementById('bookingForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    alert('Booking submitted successfully!\nTotal Payment: ' + document.getElementById('total').value);
+	
+	window.location.href = 'rating.html';
+  });
+
+</script>
+
+</body>
+</html>

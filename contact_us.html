@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <img class="back-button" src="returnicon.jpeg" alt="Back" onclick="goBack()">
+  <h1>Contact Us</h1>
+  <div class="contact-container">
+    <form id="contactForm">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Your Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+	
+	<p>If can't solve your problem,kindly contact our official contacts below:</p>
+	<ul type="circle">
+	<li>011-17054058 Mr Lee</li>
+	<li>010-34535818 Mrs Tew</li>
+	<li>03-571190</li>
+	<li>resort99@gmail.com</li>
+	</ul>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var message = document.getElementById('message').value;
+
+      alert('Message sent!\nName: ' + name + '\nEmail: ' + email + '\nMessage: ' + message);
+    });
+  </script>
+</body>
+</html>
